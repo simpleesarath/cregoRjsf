@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Form from "@rjsf/core";
+import loanSchema from "./loanSchema.json";  // Import the schema
+import validator from "@rjsf/validator-ajv8";  // Import the default validator
+import  "./App.css"
 
-function App() {
+const LoanApplicationForm = () => {
+  const onSubmit = ({ formData }) => {
+    console.log("Form data submitted: ", formData);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Loan Application Form</h1>
+      <Form
+        schema={loanSchema}  // Your schema
+        onSubmit={onSubmit}
+        validator={validator}  // Pass the default AJV validator
+        liveValidate={true}  // Enable live validation
+      />
     </div>
   );
-}
+};
 
-export default App;
+export default LoanApplicationForm;
